@@ -12,7 +12,7 @@ const clients = [
     { name: 'María Flores', status: 'Entrado a 30 días de deuda', risk: 'low', icon: <ArrowDropUpIcon /> },
   ];
 
-  const ClientList = ({ searchQuery, category }) => {
+  const ClientList = ({ searchQuery, category, onClientClick }) => {
     const filteredClients = clients
       .filter((client) =>
         client.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -26,32 +26,32 @@ const clients = [
         return false;
       });
   
-    return (
-      <List>
-        {filteredClients.length > 0 ? (
-          filteredClients.map((client, index) => (
-            <React.Fragment key={index}>
-              <ListItem button>
-                <ListItemIcon>{client.icon}</ListItemIcon>
-                <ListItemText
-                  primary={client.name}
-                  secondary={
-                    <Typography variant="body2" color="textSecondary">
-                      {client.status}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-              <Divider />
-            </React.Fragment>
-          ))
-        ) : (
-          <Typography variant="body1" color="textSecondary" style={{ padding: '20px' }}>
-            No clients found.
-          </Typography>
-        )}
-      </List>
-    );
-  };
+      return (
+        <List>
+          {filteredClients.length > 0 ? (
+            filteredClients.map((client, index) => (
+              <React.Fragment key={index}>
+                <ListItem button onClick={() => onClientClick(client)}>
+                  <ListItemIcon>{client.icon}</ListItemIcon>
+                  <ListItemText
+                    primary={client.name}
+                    secondary={
+                      <Typography variant="body2" color="textSecondary">
+                        {client.status}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <Divider />
+              </React.Fragment>
+            ))
+          ) : (
+            <Typography variant="body1" color="textSecondary" style={{ padding: '20px' }}>
+              No clients found.
+            </Typography>
+          )}
+        </List>
+      );
+    };
 
 export default ClientList;

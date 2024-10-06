@@ -6,11 +6,11 @@ import AddIcon from '@mui/icons-material/Add';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const TopBar = () => {
+const TopBar = ({ onBackClick }) => {
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center" padding="10px 20px" boxShadow={1}>
       <Box display="flex" alignItems="center">
-        <IconButton>
+        <IconButton onClick={onBackClick}>
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" style={{ marginLeft: '10px' }}>
