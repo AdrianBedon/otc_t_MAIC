@@ -1,29 +1,20 @@
 import React from 'react';
-import { ListItem, ListItemText, Box, IconButton, Divider, Typography } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { List } from '@mui/material';
+import RecommendationItem from './RecommendationItem';
 
-const RecommendationItem = ({ recommendation, liked, onLikeClick }) => {
+const RecommendationsList = ({ recommendations, liked, handleLikeClick }) => {
   return (
-    <React.Fragment>
-      <ListItem>
-        <ListItemText
-          primary={recommendation.type}
-          secondary={recommendation.detail}
+    <List>
+      {recommendations.map((recommendation, index) => (
+        <RecommendationItem
+          key={index}
+          recommendation={recommendation}
+          liked={liked[index]}
+          onLikeClick={() => handleLikeClick(index)}
         />
-        {/* Feedback Section */}
-        <Box display="flex" alignItems="center">
-          <Typography variant="body2" color="textSecondary">
-            ¿Te fue útil esta recomendación?
-          </Typography>
-          <IconButton onClick={onLikeClick}>
-            {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
-          </IconButton>
-        </Box>
-      </ListItem>
-      <Divider />
-    </React.Fragment>
+      ))}
+    </List>
   );
 };
 
-export default RecommendationItem;
+export default RecommendationsList;
