@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
-import ClientHeader from './ClientHeader';
-import RecommendationsList from './RecommendationsList';
+import ClientHeader from '../components/ClientHeader';
+import RecommendationsList from '../components/RecommendationsList';
 
 const recommendationsData = [
   { type: 'Llamada telefónica', detail: 'Llamada al número del cliente registrado. Recomendado hasta la 3ra llamada.' },

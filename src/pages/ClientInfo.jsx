@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import ClientInfoHeader from './ClientInfoHeader';
-import CreditScore from './CreditScore';
-import ClientInfoDetails from './ClientInfoDetails';
+import ClientInfoHeader from '../components/ClientInfoHeader';
+import CreditScore from '../components/CreditScore';
+import ClientInfoDetails from '../components/ClientInfoDetails';
 
 const ClientInfo = ({ client }) => {
   return (

@@ -3,8 +3,8 @@ import SideNavbar from './components/SideNavbar';
 import ClientList from './components/ClientList';
 import TopBar from './components/TopBar';
 import SearchBar from './components/SearchBar';
-import ClientDetails from './components/ClientDetails';
-import ClientInfo from './components/ClientInfo';
+import ClientDetails from './pages/ClientDetails';
+import ClientInfo from './pages/ClientInfo';
 import { Box } from '@mui/material';
 
 function App() {
