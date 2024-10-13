@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
-import ClientHeader from '../components/ClientHeader';
-import RecommendationsList from '../components/RecommendationsList';
+import React, { useState } from "react";
+import { Tabs, Tab } from "@mui/material";
+import ClientHeader from "../components/ClientHeader";
+import RecommendationsList from "../components/RecommendationsList";
+import PropTypes from "prop-types";
 
 const recommendationsData = [
-  { type: 'Llamada telefónica', detail: 'Llamada al número del cliente registrado. Recomendado hasta la 3ra llamada.' },
-  { type: 'Mensaje de texto', detail: 'Mensaje de texto al número registrado. Recomendado sin importar los mensajes previamente enviados.' },
-  { type: 'Correo electrónico', detail: 'Mensaje al correo electrónico registrado. Recomendado hasta 5 correos electrónicos.' },
+  {
+    type: "Llamada telefónica",
+    detail:
+      "Llamada al número del cliente registrado. Recomendado hasta la 3ra llamada.",
+  },
+  {
+    type: "Mensaje de texto",
+    detail:
+      "Mensaje de texto al número registrado. Recomendado sin importar los mensajes previamente enviados.",
+  },
+  {
+    type: "Correo electrónico",
+    detail:
+      "Mensaje al correo electrónico registrado. Recomendado hasta 5 correos electrónicos.",
+  },
 ];
 
 const ClientDetails = ({ client }) => {
@@ -31,9 +44,13 @@ const ClientDetails = ({ client }) => {
   };
 
   return (
-    <Box padding="20px" flexGrow={1}>
+    <div className="client_details_page">
       <ClientHeader name={client.name} status={client.status} />
-      <Tabs value={tab} onChange={(e, newValue) => setTab(newValue)} aria-label="client tabs">
+      <Tabs
+        value={tab}
+        onChange={(e, newValue) => setTab(newValue)}
+        aria-label="client tabs"
+      >
         <Tab label="Recomendado" />
         <Tab label="General" />
       </Tabs>
@@ -45,8 +62,12 @@ const ClientDetails = ({ client }) => {
         blocked={blocked}
         feedbackBlocked={feedbackBlocked}
       />
-    </Box>
+    </div>
   );
+};
+
+ClientDetails.propTypes = {
+  client: PropTypes.object.isRequired,
 };
 
 export default ClientDetails;

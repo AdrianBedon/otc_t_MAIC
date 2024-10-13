@@ -196,6 +196,13 @@ body {
   text-transform: uppercase;
 }
 
+.client_nopay_button:hover {
+  background-color: transparent;
+  color: #0166ff;
+  border-color: #0166ff;
+  cursor: pointer;
+}
+
 .client_action_button {
   font-size: 15px;
   padding: 8px;
@@ -204,6 +211,13 @@ body {
   border-radius: 3px;
   color: #0166ff;
   text-transform: uppercase;
+}
+
+.client_action_button:hover {
+  background-color: #0166ff;
+  border-color: transparent;
+  color: #f2f4ff;
+  cursor: pointer;
 }
 
 .alert_clients {
@@ -243,6 +257,48 @@ body {
 .idetails_4 {
   grid-column: 2;
   grid-row: 2;
+}
+
+.recommendation-list {
+  padding: 0px;
+}
+
+.recommendation-option {
+  border-bottom: 1px solid lightgray;
+}
+
+.recommendation-item {
+  display: grid;
+  font-size: 18px;
+  padding: 15px;
+  text-decoration: none;
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.recommendation-details {
+  color: gray;
+  font-size: 15px;
+}
+
+.recommendation-item:hover {
+  background-color: #d3d3d380;
+  cursor: pointer;
+}
+
+.recommendation-item:disabled {
+  text-decoration: line-through;
+}
+
+.recommendation-opinion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-opinion {
+  color: gray;
 }
 
 .main_app {

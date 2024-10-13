@@ -1,27 +1,37 @@
-import React from 'react';
-import { ListItem, ListItemText, Box, IconButton, Divider, Typography } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import React from "react";
+import { IconButton } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const RecommendationItem = ({ recommendation, liked, onLikeClick, blocked, onClick }) => {
+const RecommendationItem = ({
+  recommendation,
+  liked,
+  onLikeClick,
+  blocked,
+  onClick,
+}) => {
   return (
-    <React.Fragment>
-      <ListItem button={!blocked} disabled={blocked} onClick={!blocked ? onClick : null}>
-        <ListItemText
-          primary={recommendation.type}
-          secondary={recommendation.detail}
-        />
-      </ListItem>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="body2" color="textSecondary">
+    <div className="recommendation-option">
+      <button
+        className="recommendation-item"
+        button={!blocked}
+        disabled={blocked}
+        onClick={!blocked ? onClick : null}
+      >
+        {recommendation.type}
+        <label className="recommendation-details">
+          {recommendation.detail}
+        </label>
+      </button>
+      <div className="recommendation-opinion">
+        <label className="question-opinion">
           ¿Te fue útil esta recomendación?
-        </Typography>
+        </label>
         <IconButton onClick={onLikeClick}>
           {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
         </IconButton>
-      </Box>
-      <Divider />
-    </React.Fragment>
+      </div>
+    </div>
   );
 };
 
