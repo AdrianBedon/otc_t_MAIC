@@ -1,19 +1,23 @@
-import React from 'react';
-import { TextField, Box } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import PropTypes from "prop-types";
 
 const SearchBar = ({ handleSearchChange }) => {
-    return (
-      <Box display="flex" alignItems="center" marginBottom="20px">
-        <SearchIcon style={{ marginRight: '10px' }} />
-        <TextField
-          variant="outlined"
-          placeholder="Search Clients..."
-          fullWidth
-          onChange={(e) => handleSearchChange(e.target.value)}
-        />
-      </Box>
-    );
-  };
+  return (
+    <label className="search_bar">
+      <SearchIcon className="icon_search" />
+      <input
+        className="search_input"
+        type="text"
+        placeholder="Search Clients..."
+        onChange={(e) => handleSearchChange(e.target.value)}
+      />
+    </label>
+  );
+};
+
+SearchBar.propTypes = {
+  handleSearchChange: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

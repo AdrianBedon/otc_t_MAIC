@@ -1,23 +1,24 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import React from "react";
+import PropTypes from "prop-types";
 
 const ClientHeader = ({ name, status }) => {
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-      <Box>
-        <Typography variant="h4">{name}</Typography>
-        <Typography variant="subtitle1">{status}</Typography>
-      </Box>
-      <Box>
-        <Button variant="contained" color="primary" style={{ marginRight: '10px' }}>
-          Ver período de impago
-        </Button>
-        <Button variant="outlined" color="secondary">
-          Pasar a remate
-        </Button>
-      </Box>
-    </Box>
+    <div className="client_hrecommendation">
+      <div className="client_irecommendation">
+        <h4 className="client_name_header">{name}</h4>
+        <label className="client_status_header">{status}</label>
+      </div>
+      <div className="client_orecommendation">
+        <button className="client_nopay_button">Ver período de impago</button>
+        <button className="client_action_button">Pasar a remate</button>
+      </div>
+    </div>
   );
+};
+
+ClientHeader.propTypes = {
+  name: PropTypes.string,
+  status: PropTypes.string,
 };
 
 export default ClientHeader;

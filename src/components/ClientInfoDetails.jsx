@@ -1,24 +1,34 @@
-import React from 'react';
-import { Grid } from '@mui/material';
-import ClientDetailItem from './ClientDetailItem';
+import React from "react";
+import ClientDetailItem from "./ClientDetailItem";
+import PropTypes from "prop-types";
 
 const ClientDetails = ({ phone, id, portfolioPunishment, creditLimit }) => {
   return (
-    <Grid container spacing={3} mt={4}>
-      <Grid item xs={6}>
+    <div className="grid_idetails">
+      <div className="idetials_1">
         <ClientDetailItem label="Número de teléfono" value={phone} />
-      </Grid>
-      <Grid item xs={6}>
+      </div>
+      <div className="idetails_2">
         <ClientDetailItem label="Número de cédula" value={id} />
-      </Grid>
-      <Grid item xs={6}>
-        <ClientDetailItem label="Castigo de cartera" value={portfolioPunishment} />
-      </Grid>
-      <Grid item xs={6}>
+      </div>
+      <div className="idetails_3">
+        <ClientDetailItem
+          label="Castigo de cartera"
+          value={portfolioPunishment}
+        />
+      </div>
+      <div className="idetails_4">
         <ClientDetailItem label="Límite de crédito" value={creditLimit} />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
+};
+
+ClientDetails.propTypes = {
+  phone: PropTypes.string,
+  id: PropTypes.number,
+  portfolioPunishment: PropTypes.string,
+  creditLimit: PropTypes.number,
 };
 
 export default ClientDetails;
