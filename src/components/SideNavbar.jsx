@@ -1,33 +1,41 @@
-import React from 'react';
-import { List, ListItem, ListItemText, ListItemIcon, Divider } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import React from "react";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import PropTypes from "prop-types";
 
 const SideNavbar = ({ handleCategoryChange }) => {
-    const options = [
-      { text: 'Tramo 60', icon: <ArrowForwardIosIcon /> },
-      { text: 'Adelanto', icon: <CheckCircleOutlineIcon /> },
-      { text: 'Tramo 30', icon: <ArrowBackIosIcon /> },
-      { text: 'Tramo 0', icon: <AccessTimeIcon /> },
-    ];
+  // Array de opciones con texto e iconos correspondientes
+  const options = [
+    { text: "Adelanto", icon: <CheckCircleOutlineIcon /> },
+    { text: "Tramo 0", icon: <AccessTimeIcon /> },
+    { text: "Tramo 30", icon: <ArrowBackIosIcon /> },
+    { text: "Tramo 60", icon: <ArrowForwardIosIcon /> },
+  ];
 
-    return (
-        <div style={{ width: '200px', backgroundColor: '#f4f4f4', height: '100vh', paddingTop: '20px' }}>
-          <List>
-            {options.map((option, index) => (
-              <React.Fragment key={index}>
-                <ListItem button={true} onClick={() => handleCategoryChange(option.text)}>
-                  <ListItemIcon>{option.icon}</ListItemIcon>
-                  <ListItemText primary={option.text} />
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
-          </List>
-        </div>
-      );
-    };
+  return (
+    // Renderiza un contenedor <div> que actúa como barra de navegación lateral.
+    // El contenedor tiene un ancho fijo de 200px y una altura que cubre el 100% de la ventana (viewport).
+    <div className="side_nav">
+      <ul className="side_nav_list">
+        {options.map((option, index) => (
+          <li
+            className="item_side_nav"
+            key={index}
+            onClick={() => handleCategoryChange(option.text)}
+          >
+            <i className="item_list_icon">{option.icon}</i>
+            {option.text}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+SideNavbar.propTypes = {
+  handleCategoryChange: PropTypes.func.isRequired,
+};
 
 export default SideNavbar;
