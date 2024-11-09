@@ -6,9 +6,11 @@ import PropTypes from "prop-types";
 
 const clients = [
   {
+    id: 1777777777,
     name: "Marco Aurelio",
     status: "Cercano a 90 días de deuda",
     risk: "high",
+    phone: "0999999999",
     icon: <RemoveCircleOutlineIcon />,
   },
   {

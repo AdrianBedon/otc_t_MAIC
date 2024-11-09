@@ -2,6 +2,7 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import PropTypes from "prop-types";
 
 const RecommendationItem = ({
   recommendation,
@@ -14,10 +15,10 @@ const RecommendationItem = ({
     <div className="recommendation-option">
       <button
         className="recommendation-item"
-        button={!blocked}
         disabled={blocked}
         onClick={!blocked ? onClick : null}
       >
+        <i>{recommendation.icon}</i>
         {recommendation.type}
         <label className="recommendation-details">
           {recommendation.detail}
@@ -33,6 +34,14 @@ const RecommendationItem = ({
       </div>
     </div>
   );
+};
+
+RecommendationItem.propTypes = {
+  recommendation: PropTypes.object,
+  liked: PropTypes.bool,
+  onLikeClick: PropTypes.func,
+  blocked: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default RecommendationItem;

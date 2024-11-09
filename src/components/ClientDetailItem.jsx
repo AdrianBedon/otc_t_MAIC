@@ -1,13 +1,21 @@
-import React from 'react';
-import { Paper, Typography } from '@mui/material';
+import React from "react";
+import { Icon } from "@mui/material";
+import PropTypes from "prop-types";
 
-const ClientDetailItem = ({ label, value }) => {
+const ClientDetailItem = ({ label, value, icon }) => {
   return (
-    <Paper style={{ padding: '20px', textAlign: 'center' }}>
-      <Typography variant="subtitle1">{label}</Typography>
-      <Typography variant="h6">{value}</Typography>
-    </Paper>
+    <div className="client_detail_item">
+      <Icon className="client_detail_item_icon">{icon}</Icon>
+      <label className="client_detail_item_label">{label}</label>
+      <label className="client_detail_item_value">{value}</label>
+    </div>
   );
+};
+
+ClientDetailItem.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  icon: PropTypes.object,
 };
 
 export default ClientDetailItem;
