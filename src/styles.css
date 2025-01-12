@@ -330,3 +330,13 @@ body {
 .client_detail_item_value {
   font-size: 20px;
 }
+
+.login-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
