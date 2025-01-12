@@ -17,6 +17,7 @@ const clients = [
     name: "Sofía Arteaga",
     status: "Cercano a 90 días de deuda",
     risk: "high",
+    phone: "0899999999",
     icon: <RemoveCircleOutlineIcon />,
   },
   {
@@ -41,9 +42,13 @@ const clients = [
 
 const ClientList = ({ searchQuery, category, onClientClick }) => {
   const filteredClients = clients
-    .filter((client) =>
-      client.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    .filter((client) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        client.name.toLowerCase().includes(query) ||
+        (client.phone && client.phone.includes(query))
+      );
+    })
     .filter((client) => {
       if (!category) return true;
       if (category === "Tramo 60" && client.risk === "high") return true;
