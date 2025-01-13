@@ -45,11 +45,18 @@ function AppContent() {
 
   const handleLogout = async () => {
     try {
-      await instance.logoutPopup();
+      // Elimina los tokens locales sin interactuar con Microsoft
+      instance.setActiveAccount(null);
+      sessionStorage.clear(); // Limpia almacenamiento de sesión
+      localStorage.clear(); // Limpia almacenamiento local si es necesario
+  
+      // Redirige al usuario a la pantalla de login de tu aplicación
+      window.location.href = config.redirectUri;
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
+  
 
   useEffect(() => {
     const events = ["mousemove", "keydown", "click"];

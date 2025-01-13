@@ -73,6 +73,7 @@ const ClientDetails = ({ client }) => {
         handleBlockClick={handleBlockClick}
         blocked={blocked}
         feedbackBlocked={feedbackBlocked}
+        client={client} // Asegúrate de pasar el objeto completo `client`
       />
     </div>
   );
