@@ -45,42 +45,31 @@ function AppContent() {
 
   const handleLogout = async () => {
     try {
-      // Elimina los tokens locales sin interactuar con Microsoft
       instance.setActiveAccount(null);
-      sessionStorage.clear(); // Limpia almacenamiento de sesión
-      localStorage.clear(); // Limpia almacenamiento local si es necesario
-  
-      // Redirige al usuario a la pantalla de login de tu aplicación
-      window.location.href = config.redirectUri;
+      sessionStorage.clear(); // Clear session storage
+      localStorage.clear(); // Clear local storage
+      window.location.href = config.redirectUri; // Redirect to login page
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
-  
 
   useEffect(() => {
     const events = ["mousemove", "keydown", "click"];
-    
+
     const handleUserActivity = () => {
       resetTimer(); // Reset timer on user activity
     };
 
-    // Add event listeners for user activity
-    events.forEach((event) =>
-      window.addEventListener(event, handleUserActivity)
-    );
+    events.forEach((event) => window.addEventListener(event, handleUserActivity));
 
-    // Start the inactivity timer when component mounts
-    resetTimer();
+    resetTimer(); // Start the inactivity timer when component mounts
 
     return () => {
-      // Cleanup event listeners and timer when component unmounts
       clearTimeout(logoutTimer);
-      events.forEach((event) =>
-        window.removeEventListener(event, handleUserActivity)
-      );
+      events.forEach((event) => window.removeEventListener(event, handleUserActivity));
     };
-  }, []); // Empty dependency array ensures effect runs once
+  }, []);
 
   const handleCategoryChange = (selectedCategory) => {
     setCategory(selectedCategory);
@@ -123,7 +112,10 @@ function AppContent() {
     <>
       <AuthenticatedTemplate>
         <div className="container-app">
-          <SideNavbar handleCategoryChange={handleCategoryChange} />
+          <SideNavbar
+            handleCategoryChange={handleCategoryChange}
+            handleLogout={handleLogout} // Pass handleLogout to SideNavbar
+          />
           <div className="main-app">
             <TopBar
               onBackClick={handleBackToList}
@@ -149,6 +141,7 @@ function AppContent() {
     </>
   );
 }
+
 
 function App() {
   return (

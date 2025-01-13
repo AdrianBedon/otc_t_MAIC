@@ -3,10 +3,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LogoutIcon from "@mui/icons-material/Logout"; // Icon for logout
 import PropTypes from "prop-types";
 
-const SideNavbar = ({ handleCategoryChange }) => {
-  // Array de opciones con texto e iconos correspondientes
+const SideNavbar = ({ handleCategoryChange, handleLogout }) => {
   const options = [
     { text: "Adelanto", icon: <CheckCircleOutlineIcon /> },
     { text: "Tramo 0", icon: <AccessTimeIcon /> },
@@ -15,8 +15,6 @@ const SideNavbar = ({ handleCategoryChange }) => {
   ];
 
   return (
-    // Renderiza un contenedor <div> que actúa como barra de navegación lateral.
-    // El contenedor tiene un ancho fijo de 200px y una altura que cubre el 100% de la ventana (viewport).
     <div className="side_nav">
       <ul className="side_nav_list">
         {options.map((option, index) => (
@@ -29,6 +27,14 @@ const SideNavbar = ({ handleCategoryChange }) => {
             {option.text}
           </li>
         ))}
+
+        {/* Logout button */}
+        <li className="item_side_nav logout_item" onClick={handleLogout}>
+          <i className="item_list_icon">
+            <LogoutIcon />
+          </i>
+          Logout
+        </li>
       </ul>
     </div>
   );
@@ -36,6 +42,7 @@ const SideNavbar = ({ handleCategoryChange }) => {
 
 SideNavbar.propTypes = {
   handleCategoryChange: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default SideNavbar;
