@@ -3,34 +3,34 @@ import ClientDetailItem from "./ClientDetailItem";
 import PropTypes from "prop-types";
 import { AttachMoney, Gavel, PermIdentity, Smartphone } from "@mui/icons-material";
 
-const ClientDetails = ({ phone, id, portfolioPunishment, creditLimit }) => {
+const ClientDetails = ({ num_telefono, cedula, gauge, veritas }) => {
   return (
     <div className="grid_idetails">
       <div className="idetials_1">
         <ClientDetailItem
           label="Número de teléfono: "
-          value={phone}
+          value={num_telefono}
           icon={<Smartphone />}
         />
       </div>
       <div className="idetails_2">
         <ClientDetailItem
           label="Número de cédula: "
-          value={id}
+          value={cedula}
           icon={<PermIdentity />}
         />
       </div>
       <div className="idetails_3">
         <ClientDetailItem
-          label="Castigo de cartera:"
-          value={portfolioPunishment}
+          label="Gauge Index:"
+          value={gauge}
           icon={<Gavel />}
         />
       </div>
       <div className="idetails_4">
         <ClientDetailItem
-          label="Límite de crédito:"
-          value={creditLimit}
+          label="Veritas Index:"
+          value={veritas}
           icon={<AttachMoney />}
         />
       </div>
@@ -39,8 +39,8 @@ const ClientDetails = ({ phone, id, portfolioPunishment, creditLimit }) => {
 };
 
 ClientDetails.propTypes = {
-  phone: PropTypes.string,
-  id: PropTypes.number,
+  num_telefono: PropTypes.string,
+  cedula: PropTypes.number,
   portfolioPunishment: PropTypes.string,
   creditLimit: PropTypes.number,
 };

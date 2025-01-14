@@ -50,20 +50,12 @@ const ClientDetails = ({ client }) => {
 
   return (
     <div className="client_details_page">
-      <ClientHeader name={client.name} status={client.status} />
-      <Tabs
-        value={tab}
-        onChange={(e, newValue) => setTab(newValue)}
-        aria-label="client tabs"
-      >
-        <Tab label="Recomendado" />
-        <Tab label="General" />
-      </Tabs>
+      <ClientHeader nombre={client.nombre} cedula={client.cedula} />
       <ClientInfoDetails
-        phone={client.phone}
-        id={client.id}
-        portfolioPunishment={client.portfolioPunishment}
-        creditLimit={client.creditLimit}
+        num_telefono={client.num_telefono}
+        cedula={client.cedula}
+        gauge={client.gauge}
+        veritas={client.veritas}
       />
       <p></p>
       <RecommendationsList

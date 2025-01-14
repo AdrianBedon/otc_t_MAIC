@@ -13,6 +13,7 @@ import TopBar from "./components/TopBar";
 import SearchBar from "./components/SearchBar";
 import ClientDetails from "./pages/ClientDetails";
 import ClientInfo from "./pages/ClientInfo";
+import { ScoringProvider } from "./context/ScoringProvider";
 
 const msalInstance = new PublicClientApplication({
   auth: {
@@ -61,13 +62,17 @@ function AppContent() {
       resetTimer(); // Reset timer on user activity
     };
 
-    events.forEach((event) => window.addEventListener(event, handleUserActivity));
+    events.forEach((event) =>
+      window.addEventListener(event, handleUserActivity)
+    );
 
     resetTimer(); // Start the inactivity timer when component mounts
 
     return () => {
       clearTimeout(logoutTimer);
-      events.forEach((event) => window.removeEventListener(event, handleUserActivity));
+      events.forEach((event) =>
+        window.removeEventListener(event, handleUserActivity)
+      );
     };
   }, []);
 
@@ -133,7 +138,9 @@ function AppContent() {
       <UnauthenticatedTemplate>
         <div className="login-container">
           <h2>Please log in to access the application</h2>
-          <button onClick={() => instance.loginPopup({ scopes: config.scopes })}>
+          <button
+            onClick={() => instance.loginPopup({ scopes: config.scopes })}
+          >
             Log in with Azure AD
           </button>
         </div>
@@ -142,11 +149,12 @@ function AppContent() {
   );
 }
 
-
 function App() {
   return (
     <MsalProvider instance={msalInstance}>
-      <AppContent />
+      <ScoringProvider>
+        <AppContent />
+      </ScoringProvider>
     </MsalProvider>
   );
 }
