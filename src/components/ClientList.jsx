@@ -57,10 +57,10 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
     })
     .filter((client) => {
       if (!category) return true;
-      if (category === "Tramo 60" && client.gauge === "high") return true;
+      if (category === "Tramo 60" && client.tramo60 === "1") return true;
       if (category === "Adelanto") return true;
-      if (category === "Tramo 30" && client.risk === "medium") return true;
-      if (category === "Tramo 0" && client.risk === "low") return true;
+      if (category === "Tramo 30" && client.tramo30 === "1") return true;
+      if (category === "Tramo 0" && client.tramo0 === "1") return true;
       return false;
     });
 
