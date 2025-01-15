@@ -37,7 +37,7 @@ const TopBar = ({ onBackClick, viewMode, toggleViewMode }) => {
 
 TopBar.propTypes = {
   onBackClick: PropTypes.func,
-  viewMode: PropTypes.func,
+  viewMode: PropTypes.string,
   toggleViewMode: PropTypes.func,
 };
 

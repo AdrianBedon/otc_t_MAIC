@@ -51,13 +51,13 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
     .filter((client) => {
       const query = searchQuery.toLowerCase();
       return (
-        client.cedula.toLowerCase().includes(query) ||
+        client.nombre.toLowerCase().includes(query) ||
         (client.num_telefono && client.num_telefono.includes(query))
       );
     })
     .filter((client) => {
       if (!category) return true;
-      if (category === "Tramo 60" && client.risk === "high") return true;
+      if (category === "Tramo 60" && client.gauge === "high") return true;
       if (category === "Adelanto") return true;
       if (category === "Tramo 30" && client.risk === "medium") return true;
       if (category === "Tramo 0" && client.risk === "low") return true;
@@ -65,7 +65,7 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
     });
 
   return (
-    <div className="clients">
+    <nav className="container_clients">
       <ul className="client_list">
         {filteredClients.length > 0 ? (
           filteredClients.map((client, index) => (
@@ -85,7 +85,7 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
           <div className="alert_clients">No clients found.</div>
         )}
       </ul>
-    </div>
+    </nav>
   );
 };
 
