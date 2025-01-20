@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Tabs, Tab } from "@mui/material";
 import ClientHeader from "../components/ClientHeader";
 import ClientInfoDetails from "../components/ClientInfoDetails";
 import RecommendationsList from "../components/RecommendationsList";
@@ -28,7 +27,6 @@ const recommendationsData = [
 ];
 
 const ClientDetails = ({ client }) => {
-  const [tab, setTab] = useState(0);
   const [liked, setLiked] = useState([false, false, false]);
   const [blocked, setBlocked] = useState([false, false, false]);
   const [feedbackBlocked, setFeedbackBlocked] = useState([false, false, false]);
@@ -52,7 +50,7 @@ const ClientDetails = ({ client }) => {
     <div className="client_details_page">
       <ClientHeader nombre={client.nombre} cedula={client.cedula} />
       <ClientInfoDetails
-        num_telefono={client.num_telefono}
+        numTelefono={client.numTelefono}
         cedula={client.cedula}
         gauge={client.gauge}
         veritas={client.veritas}

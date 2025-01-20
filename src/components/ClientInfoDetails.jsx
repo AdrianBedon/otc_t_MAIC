@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { AttachMoney, PermIdentity, Smartphone } from "@mui/icons-material";
 import GaugeChart from "react-gauge-chart";
 
-const ClientDetails = ({ num_telefono, cedula, gauge, veritas }) => {
+const ClientDetails = ({ numTelefono, cedula, gauge, veritas }) => {
   return (
     <div className="grid_idetails">
       <div className="idetails_1">
@@ -21,7 +21,7 @@ const ClientDetails = ({ num_telefono, cedula, gauge, veritas }) => {
         <div className="idetials_2">
           <ClientDetailItem
             label="Número de teléfono: "
-            value={num_telefono}
+            value={numTelefono}
             icon={<Smartphone />}
           />
         </div>
@@ -45,10 +45,10 @@ const ClientDetails = ({ num_telefono, cedula, gauge, veritas }) => {
 };
 
 ClientDetails.propTypes = {
-  num_telefono: PropTypes.string,
+  numTelefono: PropTypes.string,
   cedula: PropTypes.string,
-  portfolioPunishment: PropTypes.string,
-  creditLimit: PropTypes.number,
+  gauge: PropTypes.string,
+  veritas: PropTypes.string,
 };
 
 export default ClientDetails;

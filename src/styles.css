@@ -57,9 +57,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
   box-shadow: 1;
-  width: calc(100vw - 250px);
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: #0166ff;
 }
 
 .top_bar_items {
@@ -68,13 +70,15 @@ body {
 }
 
 .top_bar_text {
-  color: #0166ff;
+  color: #f2f4ff;
   margin-left: 10px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .profile_text {
   margin-right: 10px;
-  color: #0166ff;
+  color: #f2f4ff;
   font-weight: bold;
 }
 
@@ -99,17 +103,19 @@ body {
 .search_bar {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 .icon_search {
   margin-right: 10px;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .search_input {
   padding: 10px;
-  width: calc(100vw - 300px);
+  width: 100vw;
   font-size: 18px;
   border-radius: 5px;
 }
@@ -124,7 +130,7 @@ body {
 
 .client_list {
   padding: 0;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 230px);
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -388,4 +394,187 @@ body {
 .modal-button-cancel:hover {
   background-color: #0166ff;
   color: white;
+}
+
+.nav_link {
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+}
+
+.nav_link:hover {
+  background-color: #00000032;
+  transition: all 0.3s;
+}
+
+.button {
+  padding: 10px;
+  margin: 0px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.login-button {
+  background-color: #f2f4ff;
+  color: #0166ff;
+}
+
+.login-button:hover {
+  background-color: transparent;
+  color: #f2f4ff;
+  border-color: #f2f4ff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-button {
+  background-color: red;
+  color: #f2f4ff;
+}
+
+.logout-button:hover {
+  background-color: transparent;
+  color: red;
+  border-color: red;
+  cursor: pointer;
+  transform: color 0.3s ease;
+}
+
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0166ff;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.img-home {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.login-home {
+  position: relative;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+
+.login-home::before,
+.login-home::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ccc;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.login-home::after {
+  transform-origin: left;
+}
+
+.login-home:hover {
+  color: #ccc;
+}
+
+.login-button:hover::before {
+  transform: scaleX(1);
+}
+
+.login-home:hover::after {
+  transform: scaleX(1);
+  transition-delay: 0.2s;
+}
+
+.login-home span {
+  position: relative;
+  z-index: 1;
+}
+
+.home-text {
+  color: #fff;
+  padding: 0px 200px 0px 200px;
+}
+
+.img-top_bar {
+  max-width: 150px;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-option {
+  display: flex;
+  position: relative;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  align-items: center;
+  margin-right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+
+.button-option::before,
+.button-option::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0166ff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.button-option::after {
+  transform-origin: right;
+}
+
+.button-option:hover {
+  color: #0166ff;
+}
+
+.button-option:hover::before {
+  transform: scaleX(1);
+}
+
+.button-option:hover::after {
+  transform: scaleX(1);
+  transition-delay: 0.2s;
+}
+
+.button-option span {
+  position: relative;
+  z-index: 1;
 }

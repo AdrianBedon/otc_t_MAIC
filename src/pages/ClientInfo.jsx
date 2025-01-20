@@ -10,7 +10,7 @@ const ClientInfo = ({ client }) => {
       <ClientInfoHeader nombre={client.nombre} cedula={client.cedula} />
       <CreditScore score={client.creditScore} />
       <ClientInfoDetails
-        num_telefono={client.num_telefono}
+        numTelefono={client.numTelefono}
         cedula={client.cedula}
         gauge={client.gauge}
         veritas={client.veritas}

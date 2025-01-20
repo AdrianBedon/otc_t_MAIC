@@ -5,41 +5,6 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import PropTypes from "prop-types";
 import { ScoringContext } from "../context/ScoringContext";
 
-//   {
-//     id: 1777777777,
-//     name: "Marco Aurelio",
-//     status: "Cercano a 90 días de deuda",
-//     risk: "high",
-//     phone: "0999999999",
-//     icon: <RemoveCircleOutlineIcon />,
-//   },
-//   {
-//     name: "Sofía Arteaga",
-//     status: "Cercano a 90 días de deuda",
-//     risk: "high",
-//     phone: "0899999999",
-//     icon: <RemoveCircleOutlineIcon />,
-//   },
-//   {
-//     name: "Juan Torres",
-//     status: "Cercano a 60 días de deuda",
-//     risk: "medium",
-//     icon: <ArrowDropDownIcon />,
-//   },
-//   {
-//     name: "Alejandro Ordoñez",
-//     status: "Entrado a 30 días de deuda",
-//     risk: "low",
-//     icon: <ArrowDropUpIcon />,
-//   },
-//   {
-//     name: "María Flores",
-//     status: "Entrado a 30 días de deuda",
-//     risk: "low",
-//     icon: <ArrowDropUpIcon />,
-//   },
-// ];
-
 const ClientList = ({ searchQuery, category, onClientClick }) => {
   const { scoring, getScoring } = useContext(ScoringContext);
 
@@ -52,7 +17,7 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
       const query = searchQuery.toLowerCase();
       return (
         client.nombre.toLowerCase().includes(query) ||
-        (client.num_telefono && client.num_telefono.includes(query))
+        (client.numTelefono && client.numTelefono.includes(query))
       );
     })
     .filter((client) => {
@@ -77,7 +42,7 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
               <i className="client_icon">{client.icon}</i>
               <div className="client_info">
                 <label className="client_name">{client.nombre}</label>
-                <label className="client_status">{client.num_telefono}</label>
+                <label className="client_status">{client.numTelefono}</label>
               </div>
             </li>
           ))
