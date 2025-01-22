@@ -1,7 +1,20 @@
-export const scoringReducer = (state = [], action) => {
+export const scoringReducer = (state, action) => {
   switch (action.type) {
     case "loadScoring":
-      return action.payload;
+      return {
+        ...state,
+        scoring: action.payload,
+      };
+    case "userScoring":
+      return {
+        ...state,
+        selectedClient: action.payload,
+      };
+    case "resetClient":
+      return {
+        ...state,
+        selectedClient: null, // Reset selected client to null
+      };
     default:
       return state;
   }

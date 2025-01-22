@@ -4,10 +4,14 @@ import CreditScore from "../components/CreditScore";
 import PropTypes from "prop-types";
 import ClientInfoDetails from "../components/ClientInfoDetails";
 
-const ClientInfo = ({ client }) => {
+const ClientInfo = ({ client, onBack }) => {
   return (
     <div className="client_details_page">
-      <ClientInfoHeader nombre={client.nombre} cedula={client.cedula} />
+      <ClientInfoHeader
+        nombre={client.nombre}
+        cedula={client.cedula}
+        onBack={onBack}
+      />
       <CreditScore score={client.creditScore} />
       <ClientInfoDetails
         numTelefono={client.numTelefono}
@@ -21,6 +25,7 @@ const ClientInfo = ({ client }) => {
 
 ClientInfo.propTypes = {
   client: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default ClientInfo;

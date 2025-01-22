@@ -22,10 +22,10 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
     })
     .filter((client) => {
       if (!category) return true;
-      if (category === "Tramo 60" && client.tramo60 === "1") return true;
-      if (category === "Adelanto") return true;
-      if (category === "Tramo 30" && client.tramo30 === "1") return true;
-      if (category === "Tramo 0" && client.tramo0 === "1") return true;
+      if (category === "Tramo 60" && client.tramo60 === 1) return true;
+      if (category === "Adelanto" && client.adelantaPago === 1) return true;
+      if (category === "Tramo 30" && client.tramo30 === 1) return true;
+      if (category === "Tramo 0" && client.tramo0 === 1) return true;
       return false;
     });
 
@@ -33,9 +33,9 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
     <nav className="container_clients">
       <ul className="client_list">
         {filteredClients.length > 0 ? (
-          filteredClients.map((client, index) => (
+          filteredClients.map((client) => (
             <li
-              key={index}
+              key={client.numTelefono}
               className="client_item"
               onClick={() => onClientClick(client)}
             >

@@ -26,7 +26,7 @@ const recommendationsData = [
   },
 ];
 
-const ClientDetails = ({ client }) => {
+const ClientDetails = ({ client, onBack }) => {
   const [liked, setLiked] = useState([false, false, false]);
   const [blocked, setBlocked] = useState([false, false, false]);
   const [feedbackBlocked, setFeedbackBlocked] = useState([false, false, false]);
@@ -48,7 +48,11 @@ const ClientDetails = ({ client }) => {
 
   return (
     <div className="client_details_page">
-      <ClientHeader nombre={client.nombre} cedula={client.cedula} />
+      <ClientHeader
+        nombre={client.nombre}
+        cedula={client.cedula}
+        onBack={onBack}
+      />
       <ClientInfoDetails
         numTelefono={client.numTelefono}
         cedula={client.cedula}
@@ -71,6 +75,7 @@ const ClientDetails = ({ client }) => {
 
 ClientDetails.propTypes = {
   client: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default ClientDetails;

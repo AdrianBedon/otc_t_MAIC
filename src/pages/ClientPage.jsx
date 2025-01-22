@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import ClientList from "../components/ClientList";
 import PropTypes from "prop-types";
@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { ScoringContext } from "../context/ScoringContext";
 
 const options = [
   { text: "Adelanto", icon: <CheckCircleOutlineIcon /> },
@@ -16,24 +17,31 @@ const options = [
   { text: "Tramo 60", icon: <ArrowForwardIosIcon /> },
 ];
 const ClientPage = ({ viewMode }) => {
-  const [selectedClient, setSelectedClient] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
+  const { selectedClient, resetSelectedClient, getScoringByPhone } =
+    useContext(ScoringContext);
 
-  const handleClientClick = (client) => {
-    setSelectedClient(client);
+  const handleClientClick = async (client) => {
+    await getScoringByPhone(client.numTelefono);
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
+  const handleBackToList = () => {
+    resetSelectedClient();
+  };
+
   const renderClientSection = () => {
     if (selectedClient) {
       if (viewMode === "info") {
-        return <ClientInfo client={selectedClient} />;
+        return <ClientInfo client={selectedClient} onBack={handleBackToList} />;
       } else {
-        return <ClientDetails client={selectedClient} />;
+        return (
+          <ClientDetails client={selectedClient} onBack={handleBackToList} />
+        );
       }
     } else {
       return (
@@ -43,7 +51,7 @@ const ClientPage = ({ viewMode }) => {
             {options.map((option) => (
               <button
                 className="button-option"
-                key={option}
+                key={option.text}
                 value={option.text}
                 onClick={handleOptionChange}
               >

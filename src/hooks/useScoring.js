@@ -1,11 +1,14 @@
 import { useReducer } from "react";
 import { scoringReducer } from "../reducers/scoringReducer";
-import { findAll } from "../services/ScoringService";
+import { findAll, findByPhone } from "../services/scoringService";
 
-const initialScoring = [];
+const initialState = {
+  scoring: [],
+  selectedClient: null,
+};
 
 export const useScoring = () => {
-  const [scoring, dispatch] = useReducer(scoringReducer, initialScoring);
+  const [state, dispatch] = useReducer(scoringReducer, initialState);
 
   const getScoring = async () => {
     const result = await findAll();
@@ -15,8 +18,25 @@ export const useScoring = () => {
     });
   };
 
+  const getScoringByPhone = async (phone) => {
+    const result = await findByPhone(phone);
+    dispatch({
+      type: "userScoring",
+      payload: result.data,
+    });
+  };
+
+  const resetSelectedClient = () => {
+    dispatch({
+      type: "resetClient",
+    });
+  };
+
   return {
-    scoring,
+    scoring: state.scoring,
+    selectedClient: state.selectedClient,
     getScoring,
+    getScoringByPhone,
+    resetSelectedClient,
   };
 };

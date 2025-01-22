@@ -12,3 +12,14 @@ export const findAll = async () => {
   }
   return null;
 };
+
+export const findByPhone = async (phone) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/${phone}`);
+    console.log("API Response:", response.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
