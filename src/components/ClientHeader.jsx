@@ -1,12 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const ClientHeader = ({ name, status }) => {
+const ClientHeader = ({ nombre, cedula, onBack }) => {
   return (
     <div className="client_hrecommendation">
+      <button className="back_button" onClick={onBack}>
+        <ArrowBackIosIcon />
+      </button>
       <div className="client_irecommendation">
-        <h4 className="client_name_header">{name}</h4>
-        <label className="client_status_header">{status}</label>
+        <h4 className="client_name_header">
+          <b>Nombre:</b> {nombre}
+        </h4>
+        <p></p>
+        <label className="client_id_header">
+          <b>Cédula:</b> {cedula}
+        </label>
       </div>
       <div className="client_orecommendation">
         <button className="client_nopay_button">Ver período de impago</button>
@@ -17,8 +26,9 @@ const ClientHeader = ({ name, status }) => {
 };
 
 ClientHeader.propTypes = {
-  name: PropTypes.string,
-  status: PropTypes.string,
+  nombre: PropTypes.string,
+  cedula: PropTypes.string,
+  onBack: PropTypes.func,
 };
 
 export default ClientHeader;

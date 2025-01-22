@@ -1,44 +1,60 @@
 import React from "react";
 import { Switch } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import AddIcon from "@mui/icons-material/Add";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { config } from "../Config";
 
-const TopBar = ({ onBackClick, viewMode, toggleViewMode }) => {
+const TopBar = ({ viewMode, toggleViewMode, handleLogout }) => {
+  const { instance } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
+
   return (
     <div className="top_bar">
       <div className="top_bar_items">
-        <button className="icon_back" onClick={onBackClick}>
-          <ArrowBackIcon />
-        </button>
-        <h2 className="top_bar_text">Lista de Clientes</h2>
+        <NavLink className=" top_bar_text" to="/">
+          <img
+            className="img-top_bar"
+            src="src\assets\MAIC_Logo_H.png"
+            alt="MAIC Logo"
+          />
+        </NavLink>
       </div>
-
+      {isAuthenticated ? (
+        <div className="top_bar_items">
+          <NavLink className="nav_link top_bar_text" to="/client-list">
+            Portafolio de Clientes
+          </NavLink>
+        </div>
+      ) : (
+        <div className="top_bar_items"></div>
+      )}
       <div className="top_bar_items">
+        {isAuthenticated ? (
+          <button className="button logout-button" onClick={handleLogout}>
+            Log Out
+          </button>
+        ) : (
+          <button
+            className="button login-button"
+            onClick={() => instance.loginPopup({ scopes: config.scopes })}
+          >
+            Log in with Azure AD
+          </button>
+        )}
         <p className="profile_text">
           {viewMode === "info" ? "Client Info" : "Recommendations"}
         </p>
         <Switch checked={viewMode === "info"} onChange={toggleViewMode} />
-        <i>
-          <AddIcon />
-        </i>
-        <i>
-          <AttachFileIcon />
-        </i>
-        <i>
-          <MoreVertIcon />
-        </i>
       </div>
     </div>
   );
 };
 
 TopBar.propTypes = {
-  onBackClick: PropTypes.func,
-  viewMode: PropTypes.func,
+  viewMode: PropTypes.string,
   toggleViewMode: PropTypes.func,
+  handleLogout: PropTypes.func,
 };
 
 export default TopBar;

@@ -1,19 +1,23 @@
 import React from "react";
 import ClientInfoHeader from "../components/ClientInfoHeader";
 import CreditScore from "../components/CreditScore";
-import ClientInfoDetails from "../components/ClientInfoDetails";
 import PropTypes from "prop-types";
+import ClientInfoDetails from "../components/ClientInfoDetails";
 
-const ClientInfo = ({ client }) => {
+const ClientInfo = ({ client, onBack }) => {
   return (
     <div className="client_details_page">
-      <ClientInfoHeader name={client.name} status={client.status} />
+      <ClientInfoHeader
+        nombre={client.nombre}
+        cedula={client.cedula}
+        onBack={onBack}
+      />
       <CreditScore score={client.creditScore} />
       <ClientInfoDetails
-        phone={client.phone}
-        id={client.id}
-        portfolioPunishment={client.portfolioPunishment}
-        creditLimit={client.creditLimit}
+        numTelefono={client.numTelefono}
+        cedula={client.cedula}
+        gauge={client.gauge}
+        veritas={client.veritas}
       />
     </div>
   );
@@ -21,6 +25,7 @@ const ClientInfo = ({ client }) => {
 
 ClientInfo.propTypes = {
   client: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default ClientInfo;

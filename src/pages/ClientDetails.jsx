@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Tabs, Tab } from "@mui/material";
 import ClientHeader from "../components/ClientHeader";
 import ClientInfoDetails from "../components/ClientInfoDetails";
 import RecommendationsList from "../components/RecommendationsList";
@@ -27,8 +26,7 @@ const recommendationsData = [
   },
 ];
 
-const ClientDetails = ({ client }) => {
-  const [tab, setTab] = useState(0);
+const ClientDetails = ({ client, onBack }) => {
   const [liked, setLiked] = useState([false, false, false]);
   const [blocked, setBlocked] = useState([false, false, false]);
   const [feedbackBlocked, setFeedbackBlocked] = useState([false, false, false]);
@@ -50,20 +48,16 @@ const ClientDetails = ({ client }) => {
 
   return (
     <div className="client_details_page">
-      <ClientHeader name={client.name} status={client.status} />
-      <Tabs
-        value={tab}
-        onChange={(e, newValue) => setTab(newValue)}
-        aria-label="client tabs"
-      >
-        <Tab label="Recomendado" />
-        <Tab label="General" />
-      </Tabs>
+      <ClientHeader
+        nombre={client.nombre}
+        cedula={client.cedula}
+        onBack={onBack}
+      />
       <ClientInfoDetails
-        phone={client.phone}
-        id={client.id}
-        portfolioPunishment={client.portfolioPunishment}
-        creditLimit={client.creditLimit}
+        numTelefono={client.numTelefono}
+        cedula={client.cedula}
+        gauge={client.gauge}
+        veritas={client.veritas}
       />
       <p></p>
       <RecommendationsList
@@ -81,6 +75,7 @@ const ClientDetails = ({ client }) => {
 
 ClientDetails.propTypes = {
   client: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default ClientDetails;
