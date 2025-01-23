@@ -1,7 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import PropTypes from "prop-types";
 import { ScoringContext } from "../context/ScoringContext";
 
@@ -17,16 +14,17 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
       const query = searchQuery.toLowerCase();
       return (
         client.nombre.toLowerCase().includes(query) ||
-        (client.numTelefono && client.numTelefono.includes(query))
+        client.numTelefono?.includes(query)
       );
     })
     .filter((client) => {
-      if (!category) return true;
-      if (category === "Tramo 60" && client.tramo60 === 1) return true;
-      if (category === "Adelanto" && client.adelantaPago === 1) return true;
-      if (category === "Tramo 30" && client.tramo30 === 1) return true;
-      if (category === "Tramo 0" && client.tramo0 === 1) return true;
-      return false;
+      return (
+        !category ||
+        (category === "Tramo 60" && client.tramo60 === 1) ||
+        (category === "Adelanto" && client.adelantaPago === 1) ||
+        (category === "Tramo 30" && client.tramo30 === 1) ||
+        (category === "Tramo 0" && client.tramo0 === 1)
+      );
     });
 
   return (
