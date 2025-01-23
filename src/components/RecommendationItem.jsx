@@ -16,84 +16,162 @@ const modalStyle = {
   p: 4,
 };
 
-const RecommendationItem = ({ recommendation, liked, onLikeClick, blocked, onClick, client }) => {
+const RecommendationItem = ({ data, onUpdate }) => {
   const [open, setOpen] = useState(false);
-  const [isBlocked, setIsBlocked] = useState(blocked); // Local state para bloquear tras confirmar
+  const [selectedRecommendation, setSelectedRecommendation] = useState(null);
+  const [feedback, setFeedback] = useState(selectedRecommendation?.feedback);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleConfirm = () => {
-    setIsBlocked(true); // Bloquear la opción
-    onClick(); // Ejecutar la función de bloqueo en `RecommendationsList`
-    handleClose(); // Cerrar modal
+  const handleOpen = (recommendation) => {
+    setSelectedRecommendation(recommendation);
+    setOpen(true);
   };
 
-  const getMessage = (type) => {
-    const { name = "Cliente", creditLimit = 0, dueDate = "31/01/2025" } = client; // Valores por defecto
-    if (type === "Correo electrónico") {
-      return `Estimado/a ${name},\n\nLe recordamos que su cuenta presenta un saldo pendiente de $${creditLimit.toFixed(
-        2
-      )} con vencimiento el ${dueDate}.\n\nAtentamente,\n[Nombre del Gestor]`;
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedRecommendation(null);
+  };
+
+  const handleConfirm = async () => {
+    if (!selectedRecommendation) return;
+
+    const updatedRecommendation = {
+      ...selectedRecommendation,
+      use: 1, // Set the flag to indicate the recommendation is used
+    };
+
+    // Simulate a PUT request
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/scoring/nba-nbc/${updatedRecommendation.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedRecommendation),
+        }
+      );
+
+      if (response.ok) {
+        onUpdate(updatedRecommendation);
+      } else {
+        console.error("Failed to update recommendation");
+      }
+    } catch (error) {
+      console.error("Error during update:", error);
+    } finally {
+      handleClose();
     }
-    if (type === "Mensaje de texto") {
-      return `Estimado/a ${name}, le recordamos que su pago de $${creditLimit.toFixed(
-        2
-      )} vence el ${dueDate}. ¡Gracias!`;
+  };
+
+  const handleFeedbackClick = async (recommendation) => {
+    const updatedRecommendation = {
+      ...recommendation,
+      feedback: feedback === 0 ? 1 : 0, // Toggle feedback value
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/scoring/nba-nbc/${updatedRecommendation.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedRecommendation),
+        }
+      );
+
+      if (response.ok) {
+        setFeedback(updatedRecommendation.feedback);
+        onUpdate(updatedRecommendation); // Notify parent about the update
+      } else {
+        console.error("Failed to update recommendation");
+      }
+    } catch (error) {
+      console.error("Error during update:", error);
     }
-    if (type === "Llamada telefónica") {
-      return `Hola ${name}, le habla [Tu Nombre] de [Nombre de la Empresa]. Tiene un saldo pendiente de $${creditLimit.toFixed(
-        2
-      )} con vencimiento el ${dueDate}. ¿Podemos enviarle más información?`;
-    }
-    return "";
   };
 
   return (
-    <div className="recommendation-option">
-      <button className="recommendation-item" disabled={isBlocked} onClick={handleOpen}>
-        <i>{recommendation.icon}</i>
-        {recommendation.type}
-        <label className="recommendation-details">{recommendation.detail}</label>
-      </button>
+    <>
+      {data
+        .sort((a, b) => a.order - b.order) // Sort by order
+        .map((recommendation) => (
+          <div key={recommendation.id} className="recommendation-option">
+            <button
+              className="recommendation-item"
+              disabled={recommendation.use === 1}
+              onClick={() => handleOpen(recommendation)}
+            >
+              <i>{recommendation.channel}</i>
+              {recommendation.channel}
+              <label className="recommendation-details">
+                {recommendation.action}
+              </label>
+            </button>
 
-      <div className="recommendation-opinion">
-        <label className="question-opinion">¿Te fue útil esta recomendación?</label>
-        <IconButton onClick={onLikeClick}>
-          {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
-        </IconButton>
-      </div>
+            <div className="recommendation-opinion">
+              <label className="question-opinion">
+                ¿Te fue útil esta recomendación?
+              </label>
+              <IconButton onClick={() => handleFeedbackClick(recommendation)}>
+                {recommendation.feedback === 1 ? (
+                  <FavoriteIcon color="error" />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </IconButton>
+            </div>
+          </div>
+        ))}
 
-      {/* Modal con mensaje personalizado */}
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={modalStyle}>
-          <Typography variant="h6">{`Acción: ${recommendation.type}`}</Typography>
-          <Typography sx={{ mt: 2, whiteSpace: "pre-line" }}>{getMessage(recommendation.type)}</Typography>
-          <Box mt={3} textAlign="center">
-            <Button variant="contained" color="primary" onClick={handleConfirm}>
-              Confirmar
-            </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClose} sx={{ ml: 2 }}>
-              Cerrar
-            </Button>
+      {/* Modal with personalized message */}
+      {selectedRecommendation && (
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={modalStyle}>
+            <Typography variant="h6">{`Acción: ${selectedRecommendation.action}`}</Typography>
+            <Typography sx={{ mt: 2, whiteSpace: "pre-line" }}>
+              {`Se utilizará el canal ${selectedRecommendation.channel} para la acción: ${selectedRecommendation.action}.`}
+            </Typography>
+            <Box mt={3} textAlign="center">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleConfirm}
+              >
+                Confirmar
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleClose}
+                sx={{ ml: 2 }}
+              >
+                Cerrar
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Modal>
-    </div>
+        </Modal>
+      )}
+    </>
   );
 };
 
 RecommendationItem.propTypes = {
-  recommendation: PropTypes.object.isRequired,
-  liked: PropTypes.bool.isRequired,
-  onLikeClick: PropTypes.func.isRequired,
-  blocked: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired, // Para manejar el bloqueo desde `RecommendationsList`
-  client: PropTypes.shape({
-    name: PropTypes.string,
-    creditLimit: PropTypes.number,
-    dueDate: PropTypes.string,
-  }).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      numTelefono: PropTypes.string.isRequired,
+      probAccion: PropTypes.number.isRequired,
+      channel: PropTypes.string.isRequired,
+      action: PropTypes.string.isRequired,
+      use: PropTypes.number.isRequired,
+      order: PropTypes.number.isRequired,
+      feedback: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  onUpdate: PropTypes.func.isRequired, // Callback to update the data
 };
 
 export default RecommendationItem;

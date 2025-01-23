@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import ClientList from "../components/ClientList";
-import PropTypes from "prop-types";
 import ClientInfo from "./ClientInfo";
 import ClientDetails from "./ClientDetails";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -16,7 +15,7 @@ const options = [
   { text: "Tramo 30", icon: <ArrowBackIosIcon /> },
   { text: "Tramo 60", icon: <ArrowForwardIosIcon /> },
 ];
-const ClientPage = ({ viewMode }) => {
+const ClientPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const { selectedClient, resetSelectedClient, getScoringByPhone } =
@@ -36,7 +35,7 @@ const ClientPage = ({ viewMode }) => {
 
   const renderClientSection = () => {
     if (selectedClient) {
-      if (viewMode === "info") {
+      if (sessionStorage.getItem("roles") === "Application.Read") {
         return <ClientInfo client={selectedClient} onBack={handleBackToList} />;
       } else {
         return (
@@ -71,10 +70,6 @@ const ClientPage = ({ viewMode }) => {
   };
 
   return <div className="client-list-page">{renderClientSection()}</div>;
-};
-
-ClientPage.propTypes = {
-  viewMode: PropTypes.string,
 };
 
 export default ClientPage;
