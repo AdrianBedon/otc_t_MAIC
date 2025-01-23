@@ -23,3 +23,14 @@ export const findByPhone = async (phone) => {
   }
   return null;
 };
+
+export const findByPhoneNB = async (phone) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/nba-nbc/${phone}`);
+    console.log("API Response:", response.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};

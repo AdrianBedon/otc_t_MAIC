@@ -1,20 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RecommendationItem from "./RecommendationItem";
 import PropTypes from "prop-types";
 
-const RecommendationsList = ({ recommendations, liked, handleLikeClick, handleBlockClick, blocked, feedbackBlocked, client }) => {
+const RecommendationsList = ({ client }) => {
+  const [recommendations, setRecommendations] = useState([]);
+
+  // Fetch recommendations from the API
+  const fetchRecommendations = async (numTelefono) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/scoring/nba-nbc/${numTelefono}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Fetched recommendations:", data);
+        setRecommendations(data);
+      }
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
+
+  // Update a recommendation locally
+  const handleUpdate = (updatedRecommendation) => {
+    setRecommendations((prev) =>
+      prev.map((rec) =>
+        rec.id === updatedRecommendation.id ? updatedRecommendation : rec
+      )
+    );
+  };
+
+  // Fetch recommendations when the client changes
+  useEffect(() => {
+    if (client?.numTelefono) {
+      fetchRecommendations(client.numTelefono);
+    }
+  }, [client]);
+
   return (
     <div className="recommendation-list">
-      {recommendations.map((recommendation, index) => (
+      {recommendations.map((recommendation) => (
         <RecommendationItem
-          key={index}
-          recommendation={recommendation}
-          liked={liked[index]}
-          onLikeClick={() => handleLikeClick(index)}
-          onClick={() => handleBlockClick(index)}
-          blocked={blocked[index]}
-          feedbackBlocked={feedbackBlocked[index]}
-          client={client} // Pasa el cliente aquí
+          key={recommendation.id}
+          data={[recommendation]} // Pass the recommendation as an array
+          onUpdate={handleUpdate} // Handle updates
         />
       ))}
     </div>
@@ -22,13 +51,9 @@ const RecommendationsList = ({ recommendations, liked, handleLikeClick, handleBl
 };
 
 RecommendationsList.propTypes = {
-  recommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  liked: PropTypes.arrayOf(PropTypes.bool).isRequired,
-  handleLikeClick: PropTypes.func.isRequired,
-  handleBlockClick: PropTypes.func.isRequired,
-  blocked: PropTypes.arrayOf(PropTypes.bool).isRequired,
-  feedbackBlocked: PropTypes.arrayOf(PropTypes.bool).isRequired,
-  client: PropTypes.object.isRequired,
+  client: PropTypes.shape({
+    numTelefono: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default RecommendationsList;

@@ -231,7 +231,6 @@ body {
 
 .alert_clients {
   margin-left: 10px;
-  width: calc(100vw - 280px);
   background-color: #f7dc6f75;
   padding: 20px;
   border-radius: 10px;

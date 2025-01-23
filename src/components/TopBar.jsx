@@ -1,13 +1,18 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { config } from "../Config";
 
-const TopBar = ({ viewMode, toggleViewMode, handleLogout }) => {
+const TopBar = ({ handleLogout }) => {
   const { instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
+
+  const handleLogin = async () => {
+    const token = await instance.acquireTokenPopup({ scopes: config.scopes });
+    sessionStorage.setItem("roles", token.idTokenClaims?.roles);
+    console.log(sessionStorage.getItem("roles"));
+  };
 
   return (
     <div className="top_bar">
@@ -31,29 +36,27 @@ const TopBar = ({ viewMode, toggleViewMode, handleLogout }) => {
       )}
       <div className="top_bar_items">
         {isAuthenticated ? (
-          <button className="button logout-button" onClick={handleLogout}>
-            Log Out
-          </button>
+          <>
+            <button className="button logout-button" onClick={handleLogout}>
+              Log Out
+            </button>
+            <p className="profile_text">
+              {sessionStorage.getItem("roles") === "Application.Read"
+                ? "Atención al Usuario"
+                : "Cobranzas"}
+            </p>
+          </>
         ) : (
-          <button
-            className="button login-button"
-            onClick={() => instance.loginPopup({ scopes: config.scopes })}
-          >
+          <button className="button login-button" onClick={handleLogin}>
             Log in with Azure AD
           </button>
         )}
-        <p className="profile_text">
-          {viewMode === "info" ? "Client Info" : "Recommendations"}
-        </p>
-        <Switch checked={viewMode === "info"} onChange={toggleViewMode} />
       </div>
     </div>
   );
 };
 
 TopBar.propTypes = {
-  viewMode: PropTypes.string,
-  toggleViewMode: PropTypes.func,
   handleLogout: PropTypes.func,
 };
 

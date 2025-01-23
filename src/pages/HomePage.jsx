@@ -6,6 +6,12 @@ const HomePage = () => {
   const { instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
 
+  const handleLogin = async () => {
+    const token = await instance.acquireTokenPopup({ scopes: config.scopes });
+    sessionStorage.setItem("roles", token.idTokenClaims?.roles);
+    console.log(sessionStorage.getItem("roles"));
+  };
+
   return (
     <div className="home-page">
       <div className="content-container">
@@ -32,10 +38,7 @@ const HomePage = () => {
             </p>
           </>
         ) : (
-          <button
-            className="login-home"
-            onClick={() => instance.loginPopup({ scopes: config.scopes })}
-          >
+          <button className="login-home" onClick={handleLogin}>
             <span>Log in with Azure AD</span>
           </button>
         )}

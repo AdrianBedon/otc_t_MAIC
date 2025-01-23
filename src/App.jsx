@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   MsalProvider,
   AuthenticatedTemplate,
@@ -26,7 +26,6 @@ const msalInstance = new PublicClientApplication({
 
 const App = () => {
   const { instance } = useMsal();
-  const [viewMode, setViewMode] = useState("recommendations");
 
   const INACTIVITY_TIMEOUT = 2 * 60 * 1000;
   let logoutTimer;
@@ -70,22 +69,12 @@ const App = () => {
     };
   }, []);
 
-  const toggleViewMode = () => {
-    setViewMode((prevMode) =>
-      prevMode === "recommendations" ? "info" : "recommendations"
-    );
-  };
-
   return (
     <MsalProvider instance={msalInstance}>
-      <TopBar
-        viewMode={viewMode}
-        toggleViewMode={toggleViewMode}
-        handleLogout={handleLogout}
-      />
+      <TopBar handleLogout={handleLogout} />
       <AuthenticatedTemplate>
         <Routes>
-          <Route path="*" element={<MAICRoutes viewMode={viewMode} />} />
+          <Route path="*" element={<MAICRoutes />} />
         </Routes>
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>
