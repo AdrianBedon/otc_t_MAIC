@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
+import { Modal, Box, Typography, Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
@@ -105,7 +105,7 @@ const RecommendationItem = ({ data, onUpdate }) => {
               onClick={() => handleOpen(recommendation)}
             >
               <i>{recommendation.channel}</i>
-              {recommendation.channel}
+              Se usará {recommendation.channel} para contactar al cliente
               <label className="recommendation-details">
                 {recommendation.action}
               </label>
@@ -115,18 +115,20 @@ const RecommendationItem = ({ data, onUpdate }) => {
               <label className="question-opinion">
                 ¿Te fue útil esta recomendación?
               </label>
-              <IconButton onClick={() => handleFeedbackClick(recommendation)}>
+              <button
+                className="btn-feedback"
+                onClick={() => handleFeedbackClick(recommendation)}
+              >
                 {recommendation.feedback === 1 ? (
                   <FavoriteIcon color="error" />
                 ) : (
                   <FavoriteBorderIcon />
                 )}
-              </IconButton>
+              </button>
             </div>
           </div>
         ))}
 
-      {/* Modal with personalized message */}
       {selectedRecommendation && (
         <Modal open={open} onClose={handleClose}>
           <Box sx={modalStyle}>

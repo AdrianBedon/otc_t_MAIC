@@ -4,23 +4,23 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const ClientHeader = ({ nombre, cedula, onBack }) => {
   return (
-    <div className="client_hrecommendation">
-      <button className="back_button" onClick={onBack}>
-        <ArrowBackIosIcon />
-      </button>
-      <div className="client_irecommendation">
-        <h4 className="client_name_header">
-          <b>Nombre:</b> {nombre}
-        </h4>
-        <p></p>
-        <label className="client_id_header">
-          <b>Cédula:</b> {cedula}
-        </label>
+    <div className="client_header">
+      <div className="left-section-header">
+        <button className="back-button" onClick={onBack}>
+          <ArrowBackIosIcon />
+        </button>
+        <div className="client-data">
+          <h4 className="client-name-header">{nombre}</h4>
+          <label className="client-ci-header">
+            <b>Cédula:</b> {cedula}
+          </label>
+        </div>
       </div>
-      <div className="client_orecommendation">
-        <button className="client_nopay_button">Ver período de impago</button>
-        <button className="client_action_button">Pasar a remate</button>
-      </div>
+      {sessionStorage.getItem("roles") !== "Application.Read" && (
+        <div className="client-button-section">
+          <button className="client-auction-btn">Enviar a remate</button>
+        </div>
+      )}
     </div>
   );
 };

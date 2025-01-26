@@ -38,14 +38,17 @@ const RecommendationsList = ({ client }) => {
   }, [client]);
 
   return (
-    <div className="recommendation-list">
-      {recommendations.map((recommendation) => (
-        <RecommendationItem
-          key={recommendation.id}
-          data={[recommendation]} // Pass the recommendation as an array
-          onUpdate={handleUpdate} // Handle updates
-        />
-      ))}
+    <div className="recommendation-section">
+      <h2 className="recommendation-title">Acciones Sugeridas</h2>
+      <div className="recommendation-list">
+        {recommendations.map((recommendation) => (
+          <RecommendationItem
+            key={recommendation.id}
+            data={[recommendation]} // Pass the recommendation as an array
+            onUpdate={handleUpdate} // Handle updates
+          />
+        ))}
+      </div>
     </div>
   );
 };

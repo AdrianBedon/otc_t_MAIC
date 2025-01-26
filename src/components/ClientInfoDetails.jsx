@@ -1,54 +1,52 @@
 import React from "react";
 import ClientDetailItem from "./ClientDetailItem";
 import PropTypes from "prop-types";
-import { AttachMoney, PermIdentity, Smartphone } from "@mui/icons-material";
+import { AttachMoney, Smartphone } from "@mui/icons-material";
 import GaugeChart from "react-gauge-chart";
 
-const ClientDetails = ({ numTelefono, cedula, gauge, veritas }) => {
+const ClientDetails = ({ client }) => {
+  const determineGroup = () => {
+    if (client.adelantaPago === 1) return "Adelanta tu Pago";
+    if (client.tramo0 === 1) return "Tramo 0";
+    if (client.tramo30 === 1) return "Tramo 30";
+    if (client.tramo60 === 1) return "Tramo 60";
+  };
   return (
-    <div className="grid_idetails">
-      <div className="idetails_1">
+    <div className="grid-details">
+      <div className="gauge-area">
+        <h2 className="gauge-title">Gauge Index</h2>
         <GaugeChart
-          className="gauge_chart"
-          percent={Number(gauge) / 1000}
+          className="gauge-chart"
+          percent={Number(client.gauge) / 1000}
           textColor="#000000"
           colors={["#FF0000", "#00FF00"]}
           style={{ width: "100%" }}
-          formatTextValue={value=>value*10}
+          nrOfLevels={5}
+          formatTextValue={(value) => value * 10}
         />
       </div>
-      <div className="details_right">
-        <div className="idetials_2">
-          <ClientDetailItem
-            label="Número de teléfono: "
-            value={numTelefono}
-            icon={<Smartphone />}
-          />
-        </div>
-        <div className="idetails_3">
-          <ClientDetailItem
-            label="Número de cédula: "
-            value={cedula}
-            icon={<PermIdentity />}
-          />
-        </div>
-        <div className="idetails_4">
-          <ClientDetailItem
-            label="Veritas Index:"
-            value={veritas}
-            icon={<AttachMoney />}
-          />
-        </div>
+      <div className="client-details">
+        <ClientDetailItem
+          label="Número de teléfono"
+          value={client.numTelefono}
+          icon={<Smartphone />}
+        />
+        <ClientDetailItem
+          label="Tramo de Mora"
+          value={determineGroup()}
+          icon={<AttachMoney />}
+        />
+      </div>
+      <div className="veritas-area">
+        <h2 className="veritas-title">Veritas Index</h2>
+        <p className="veritas-score">{client.veritas}</p>
       </div>
     </div>
   );
 };
 
 ClientDetails.propTypes = {
-  numTelefono: PropTypes.string,
-  cedula: PropTypes.string,
-  gauge: PropTypes.string,
-  veritas: PropTypes.string,
+  client: PropTypes.object.isRequired,
 };
 
 export default ClientDetails;

@@ -53,12 +53,7 @@ const ClientDetails = ({ client, onBack }) => {
         cedula={client.cedula}
         onBack={onBack}
       />
-      <ClientInfoDetails
-        numTelefono={client.numTelefono}
-        cedula={client.cedula}
-        gauge={client.gauge}
-        veritas={client.veritas}
-      />
+      <ClientInfoDetails client={client} />
       <p></p>
       <RecommendationsList
         recommendations={recommendationsData}
@@ -69,6 +64,10 @@ const ClientDetails = ({ client, onBack }) => {
         feedbackBlocked={feedbackBlocked}
         client={client} // Asegúrate de pasar el objeto completo `client`
       />
+      <p className="info-disclaimer">
+        Las acciones sugeridas para contactar con el cliente son evaluadas
+        mensualmente y pueden variar
+      </p>
     </div>
   );
 };

@@ -170,49 +170,46 @@ body {
   padding: 3px;
 }
 
+/********[Client Header]********/
 .client_header {
-  margin-bottom: 4;
-  padding: 10px;
-}
-
-.client_hrecommendation {
   display: flex;
+  margin-bottom: 2px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2px;
   padding: 10px;
 }
 
-.client_name_header {
+.left-section-header {
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+}
+
+.back-button:hover {
+  color: #0166ff;
+  cursor: pointer;
+}
+
+.client-data {
+  padding: 0px 0px 0px 10px;
+}
+
+.client-name-header {
   font-size: 30px;
-  font-weight: lighter;
-  margin-bottom: 0;
-  margin-top: 0;
+  font-weight: bold;
+  margin: 0px;
 }
 
-.client_id_header {
+.client-ci-header {
   color: darkgrey;
+  font-size: 18px;
 }
 
-.client_nopay_button {
-  margin-right: 10px;
-  font-size: 15px;
-  padding: 8px;
-  background-color: #0166ff;
-  border-color: transparent;
-  border-radius: 3px;
-  color: #f2f4ff;
-  text-transform: uppercase;
-}
-
-.client_nopay_button:hover {
-  background-color: transparent;
-  color: #0166ff;
-  border-color: #0166ff;
-  cursor: pointer;
-}
-
-.client_action_button {
+.client-auction-btn {
   font-size: 15px;
   padding: 8px;
   background-color: transparent;
@@ -222,12 +219,157 @@ body {
   text-transform: uppercase;
 }
 
-.client_action_button:hover {
+.client-auction-btn:hover {
   background-color: #0166ff;
   border-color: transparent;
   color: #f2f4ff;
   cursor: pointer;
 }
+/********[Client Header]********/
+
+/********[Client Details]********/
+.grid-details {
+  display: grid;
+  margin: 4px 25px 0px 25px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gauge-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 2px solid #ccc;
+}
+
+.gauge-title {
+  align-items: center;
+}
+
+.gauge-chart {
+  align-items: center;
+}
+
+.client-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.client-detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-title {
+  display: flex;
+  align-items: center;
+}
+
+.detail-icon {
+  padding: 2px;
+}
+
+.detail-label {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px 10px 15px 10px;
+}
+
+.detail-value {
+  font-size: 20px;
+}
+
+.veritas-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 2px solid #ccc;
+}
+
+.veritas-title {
+  align-items: center;
+}
+
+.veritas-score {
+  align-items: center;
+  font-size: 60px;
+  font-weight: bold;
+}
+/********[Client Details]********/
+
+/********[Recommendations]********/
+.recommendation-section {
+  padding: 0px 25px 0px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendation-title {
+  padding-left: 25px;
+}
+
+.recommendation-list {
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.recommendation-option {
+  border-bottom: 1px solid lightgray;
+  width: calc(100% / 3);
+  margin: 0px 5px 0px 5px;
+}
+
+.recommendation-item {
+  display: grid;
+  font-size: 18px;
+  padding: 15px;
+  text-decoration: none;
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 15px;
+}
+
+.recommendation-item:hover {
+  background-color: #d3d3d380;
+  cursor: pointer;
+}
+
+.recommendation-item:disabled {
+  text-decoration: line-through;
+}
+
+.recommendation-details {
+  color: gray;
+  font-size: 12px;
+}
+
+.recommendation-opinion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-opinion {
+  color: gray;
+}
+
+.btn-feedback {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-feedback:hover {
+  cursor: pointer;
+}
+/********[Recommendations]********/
 
 .alert_clients {
   margin-left: 10px;
@@ -242,95 +384,10 @@ body {
   flex-grow: 1;
 }
 
-.grid_idetails {
-  display: grid;
-  margin-top: 4px;
-  grid-template-columns: 1fr 2fr;
-}
-
-.idetails_1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.details_right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-}
-
-.recommendation-list {
-  padding: 0px;
-  display: flex;
-  flex-direction: row;
-}
-
-.recommendation-option {
-  border-bottom: 1px solid lightgray;
-  width: calc(100% / 3);
-}
-
-.recommendation-item {
-  display: grid;
-  font-size: 18px;
-  padding: 15px;
-  text-decoration: none;
-  width: 100%;
-  background-color: transparent;
-  border-color: transparent;
-}
-
-.recommendation-details {
-  color: gray;
-  font-size: 12px;
-}
-
-.recommendation-item:hover {
-  background-color: #d3d3d380;
-  cursor: pointer;
-}
-
-.recommendation-item:disabled {
-  text-decoration: line-through;
-}
-
-.recommendation-opinion {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.question-opinion {
-  color: gray;
-}
-
 .main_app {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-.client_detail_item {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  padding-left: 35px;
-}
-
-.client_detail_item_icon {
-  padding: 5px;
-}
-
-.client_detail_item_label {
-  font-weight: bold;
-  font-size: 20px;
-  padding: 15px;
-}
-
-.client_detail_item_value {
-  font-size: 20px;
 }
 
 .login-container {
@@ -525,6 +582,10 @@ body {
   align-items: center;
 }
 
+.icon-btn {
+  padding-right: 5px;
+}
+
 .button-option {
   display: flex;
   position: relative;
@@ -576,4 +637,10 @@ body {
 .button-option span {
   position: relative;
   z-index: 1;
+}
+
+.info-disclaimer {
+  color: gray;
+  font-size: 12px;
+  padding-left: 25px;
 }
