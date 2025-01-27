@@ -96,9 +96,17 @@ const RecommendationItem = ({ data, onUpdate }) => {
   return (
     <>
       {data
-        .sort((a, b) => a.order - b.order) // Sort by order
+        .sort((a, b) => a.order - b.order)
         .map((recommendation) => (
-          <div key={recommendation.id} className="recommendation-option">
+          <div
+            key={recommendation.id}
+            className={
+              recommendation.use === 1
+                ? "recommendation-option-disabled"
+                : "recommendation-option"
+            }
+            data-order={recommendation.order}
+          >
             <button
               className="recommendation-item"
               disabled={recommendation.use === 1}
