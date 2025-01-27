@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 
 const ClientDetailItem = ({ label, value, icon }) => {
   return (
-    <div className="client_detail_item">
-      <Icon className="client_detail_item_icon">{icon}</Icon>
-      <label className="client_detail_item_label">{label}</label>
-      <label className="client_detail_item_value">{value}</label>
+    <div className="client-detail-item">
+      <div className="detail-title">
+        <Icon className="detail-icon">{icon}</Icon>
+        <label className="detail-label">{label}</label>
+      </div>
+      <label className="detail-value">{value}</label>
     </div>
   );
 };

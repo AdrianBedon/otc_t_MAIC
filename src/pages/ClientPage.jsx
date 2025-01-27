@@ -3,17 +3,21 @@ import SearchBar from "../components/SearchBar";
 import ClientList from "../components/ClientList";
 import ClientInfo from "./ClientInfo";
 import ClientDetails from "./ClientDetails";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { ScoringContext } from "../context/ScoringContext";
+import {
+  AssignmentLateOutlined,
+  EventBusyOutlined,
+  Payment,
+  Replay,
+  WatchLater,
+} from "@mui/icons-material";
 
 const options = [
-  { text: "Adelanto", icon: <CheckCircleOutlineIcon /> },
-  { text: "Tramo 0", icon: <AccessTimeIcon /> },
-  { text: "Tramo 30", icon: <ArrowBackIosIcon /> },
-  { text: "Tramo 60", icon: <ArrowForwardIosIcon /> },
+  { text: "Adelanta tu Pago", icon: <Payment /> },
+  { text: "Tramo 0", icon: <WatchLater /> },
+  { text: "Tramo 30", icon: <AssignmentLateOutlined /> },
+  { text: "Tramo 60", icon: <EventBusyOutlined /> },
+  { text: "Restablecer Filtro", icon: <Replay /> },
 ];
 const ClientPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +58,7 @@ const ClientPage = () => {
                 value={option.text}
                 onClick={handleOptionChange}
               >
-                <i>{option.icon}</i>
+                <i className="icon-btn">{option.icon}</i>
                 {option.text}
               </button>
             ))}

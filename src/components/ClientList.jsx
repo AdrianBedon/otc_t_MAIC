@@ -21,9 +21,10 @@ const ClientList = ({ searchQuery, category, onClientClick }) => {
       return (
         !category ||
         (category === "Tramo 60" && client.tramo60 === 1) ||
-        (category === "Adelanto" && client.adelantaPago === 1) ||
+        (category === "Adelanta tu Pago" && client.adelantaPago === 1) ||
         (category === "Tramo 30" && client.tramo30 === 1) ||
-        (category === "Tramo 0" && client.tramo0 === 1)
+        (category === "Tramo 0" && client.tramo0 === 1) ||
+        (category === "Restablecer Filtro" && client)
       );
     });
 
