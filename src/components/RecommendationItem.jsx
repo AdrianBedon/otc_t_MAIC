@@ -120,9 +120,6 @@ const RecommendationItem = ({ data, onUpdate }) => {
             </button>
 
             <div className="recommendation-opinion">
-              <label className="question-opinion">
-                ¿Te fue útil esta recomendación?
-              </label>
               <button
                 className="btn-feedback"
                 onClick={() => handleFeedbackClick(recommendation)}
@@ -133,6 +130,9 @@ const RecommendationItem = ({ data, onUpdate }) => {
                   <FavoriteBorderIcon />
                 )}
               </button>
+              <label className="question-opinion">
+                ¿Te fue útil esta recomendación?
+              </label>
             </div>
           </div>
         ))}
