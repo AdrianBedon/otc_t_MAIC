@@ -1,6 +1,6 @@
 export const config = {
     appId: "13eec479-2f5f-4a06-adb0-bcda6fadb428",
-    redirectUri: "http://localhost:5173",
+    redirectUri: "https://maic.vercel.app",
     scopes: [
       "user.read"
     ],
